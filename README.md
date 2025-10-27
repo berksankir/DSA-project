@@ -2,7 +2,7 @@
 1) Project Proposal:
    
 I ask this question: Do weekly changes in diplomatic discourse from country i toward country j help anticipate protest/tension events in j over the next 1–4 weeks? 
-I will create simple weekly signals from diplomatic texts (tone/stance/frames at the dyad level), match them with GDELT protest/tension indicators, and evaluate basic early-warning value. The focus is a clean, reproducible dataset rather than complex modeling.
+I will create simple weekly signals from diplomatic texts (tone/stance/frames at the dyad level), match them with GDELT protest/tension indicators, and evaluate basic early-warning value.
 ________________________________________
 2) Data To Be Used:
 
@@ -10,7 +10,7 @@ ________________________________________
 
 •	GDELT Events (v2): Global event records; we will use protest (root 14) and related tension/violence families (13, 15–20).
 
-•	Lowy Global Diplomacy Index (optional): Yearly diplomatic network/context measures.
+•	Lowy Global Diplomacy Index: Yearly diplomatic network/context measures.
 
 All sources are public and will be credited and their licenses will be respected.
 ________________________________________
