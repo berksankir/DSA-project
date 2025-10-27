@@ -1,4 +1,4 @@
-# From Diplomacy Discourse to On-the-Ground Events
+# From Diplomacy Discourse to On the Ground Events
 1) Project Proposal:
    
 I ask this question: Do weekly changes in diplomatic discourse from country i toward country j help anticipate protest/tension events in j over the next 1–4 weeks? 
