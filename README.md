@@ -4,6 +4,20 @@
    
 I ask this question: Do weekly changes in diplomatic discourse from one country towards another country help anticipate protest/tension events in the second country over the next 1–4 weeks? 
 I will create simple weekly signals from diplomatic texts (tone/stance/frames at the dyad level), match them with GDELT protest/tension indicators, and evaluate basic early warning value.
+______________________________________
+Country dyads and scope:
+
+In this project, I will focus on diplomatic discourse and on-ground events in the context of the Russia–Ukraine war. Our core dyads are:
+
+- United States – Russia (US–RU)
+- United States – Ukraine (US–UA)
+- Russia – Ukraine (RU–UA)
+
+The full data pipeline (diplomatic text processing, dyad–week feature construction, and GDELT event matching) is implemented for these three dyads. 
+
+As a possible extension (if time permits), the same pipeline can be applied to:
+- United Kingdom – Russia (UK–RU)
+- United Kingdom – Ukraine (UK–UA)
 ________________________________________
  Data To Be Used:
 
