@@ -1,0 +1,17 @@
+{
+  "panel_path": "data_processed\\panel_diplomacy_gdelt_week_2019_2024.csv",
+  "alpha_used": 11.470955341595957,
+  "week_term": "week",
+  "scale_factor": 10000.0,
+  "models": "one-feature-at-a-time NB GLM with HC1 robust SE; controls: num_docs + dyad FE + year FE + week control",
+  "features_tested": [
+    "war_ratio",
+    "peace_ratio",
+    "security_frame_ratio",
+    "economy_frame_ratio",
+    "humanrights_frame_ratio",
+    "support_ratio",
+    "condemn_ratio",
+    "tone_support_score"
+  ]
+}
