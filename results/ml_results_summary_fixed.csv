@@ -1,0 +1,13 @@
+section,task,model,features,note,threshold_rule,thr,split,roc_auc,pr_auc,precision,recall,f1,tp,fp,tn,fn,calibration,brier,decision
+final_choice,PROTEST_BINARY,HGB-Cls,"num_docs=True, lag1=True",Selected as best protest binary model (from test PR-AUC/F1),,,,,,,,,,,,,,,
+final_choice,MILITARY_BINARY,LogReg,"num_docs=False, lag1=True",Selected as best military binary model (from test F1),,,,,,,,,,,,,,,
+final_choice,PROTEST_COUNT,NegBin(GLM),same base features,Selected as best count baseline (lowest MAE/RMSE vs log1p boosting),,,,,,,,,,,,,,,
+final_choice,MILITARY_COUNT,NegBin(GLM),same base features,Selected as best count baseline (lowest MAE/RMSE vs log1p boosting),,,,,,,,,,,,,,,
+threshold_report,MILITARY_BINARY,LogReg,"num_docs=False, lag1=True",,VAL_F1_OPT,0.55,TEST,0.893887,0.772959,0.597561,0.960784,0.736842,49,33,69,2,,,
+threshold_report,MILITARY_BINARY,LogReg,"num_docs=False, lag1=True",,VAL_PREC>=0.70_MAXREC,0.41,TEST,0.893887,0.772959,0.520408,1.0,0.684536,51,47,55,0,,,
+threshold_report,PROTEST_BINARY,HGB-Cls,"num_docs=True, lag1=True",,VAL_F1_OPT,0.6,TEST,0.875286,0.697757,0.538462,0.736842,0.622222,28,24,91,10,,,
+threshold_report,PROTEST_BINARY,HGB-Cls,"num_docs=True, lag1=True",,VAL_PREC>=0.70_MAXREC,0.22,TEST,0.875286,0.697757,0.443038,0.921053,0.598291,35,44,71,3,,,
+calibration,PROTEST_BINARY,HGB-Cls,"num_docs=True, lag1=True",Sigmoid worsened PR-AUC and Brier; keep uncalibrated probabilities.,,,TEST,0.908238,0.703526,,,,,,,,none(train+val fit),0.125235,keep_uncalibrated
+calibration,PROTEST_BINARY,HGB-Cls,"num_docs=True, lag1=True",,,,TEST,0.881922,0.685044,,,,,,,,sigmoid(cv=5 on train+val),0.144708,reject
+calibration,MILITARY_BINARY,LogReg,"num_docs=False, lag1=True",Best PR-AUC (ranking/detection).,,,TEST,0.899846,0.781996,,,,,,,,none(train+val fit),0.173492,use_for_PR_ranking
+calibration,MILITARY_BINARY,LogReg,"num_docs=False, lag1=True",Much better Brier with minimal PR-AUC drop.,,,TEST,0.897155,0.780837,,,,,,,,sigmoid(cv=5 on train+val),0.139207,use_if_probability_quality_needed
