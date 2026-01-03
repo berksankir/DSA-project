@@ -183,7 +183,7 @@ reports/figures/fig_pr_protest_test.png
 reports/figures/fig_pr_military_test.png
 
 
-*Files Referenced in the Report:
+* Files Referenced in the Report:
 
 results/final_binary_report_two_thresholds.csv
 
