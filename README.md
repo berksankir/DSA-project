@@ -69,4 +69,134 @@ I test whether diplomatic discourse features (lexicon-based ratios/scores) are a
 **H0:** Discourse features do not predict next-week protest events.  
 **Tests/Models:** Negative Binomial regression (counts); Logistic regression (binary robustness).  
 **Visuals:** Coefficient plot + predicted effect (or quantile comparison) plots.
+________________________________________
+ Machine Learning Methods (Post Hypothesis-Testing)
 
+After hypothesis testing, I apply ML methods to assess predictive early-warning performance for both:
+
+Binary outcomes: whether an event occurs next week (1[count>0])
+Count outcomes: next-week event counts
+
+* Data Splits (Time-based)
+
+To avoid leakage, time-based splits are used:
+
+Train: years ≤ 2022
+Validation: year = 2023 (threshold/model selection)
+Test: year = 2024 (final reporting)
+
+* Binary Modeling (Classification)
+
+Final models selected based on validation + test robustness:
+
+PROTEST_BINARY: HistGradientBoostingClassifier
+Features include discourse ratios/scores + num_docs and lag1.
+
+MILITARY_BINARY: LogisticRegression (with scaling, class_weight balanced)
+Features include discourse ratios/scores with lag1; num_docs excluded (ablation showed it hurt performance).
+
+* Thresholding: thresholds are selected on VAL (not TEST):
+
+VAL_F1_OPT: threshold maximizing F1 on validation
+
+VAL_PREC>=0.70_MAXREC: threshold meeting a precision constraint on validation while maximizing recall (used as an alternative “high-recall operating point”)
+
+* Feature Robustness (Ablation)
+
+An ablation study evaluates performance impact of:
+
+Including/excluding num_docs
+
+Including/excluding lag1 features
+
+* Interpretability
+
+Permutation importance is reported for the selected binary models:
+
+perm_importance_protest.csv
+perm_importance_military.csv
+
+* Count Modeling
+
+Count prediction is evaluated using:
+
+Negative Binomial GLM (baseline)
+Alternative hurdle-style variants were tested but did not improve final error metrics, so the baseline is retained for reporting.
+
+* Probability Calibration (Experimental)
+
+Calibration experiments are run as an additional analysis:
+
+PROTEST: calibration worsened (rejected)
+
+MILITARY: sigmoid calibration improved Brier score with minimal PR-AUC change (optional depending on whether calibrated probabilities are required)
+
+
+* How to Run (Reproduce Results)
+
+1) Install dependencies
+py -m pip install -U pip
+py -m pip install -U pandas numpy scikit-learn statsmodels matplotlib
+
+2) Data location
+
+Place the processed panel dataset here:
+
+data_processed/panel_diplomacy_gdelt_week_2019_2024.csv
+
+3) Run ML pipeline (recommended order)
+(a) Train baseline models + export importance
+py scripts/run_ml_models.py
+
+(b) Ablation study
+py scripts/run_ablation.py
+
+
+Produces:
+
+results/ablation_binary_results.csv
+
+(c) Final binary report (two thresholds)
+py scripts/run_final_binary_report.py
+
+
+Produces:
+
+results/final_binary_report_two_thresholds.csv
+
+(d) Calibration experiment (optional)
+py scripts/run_calibration.py
+
+
+Produces:
+
+results/calibration_report.csv
+
+(e) PR curves on TEST (for the report)
+py scripts/plot_pr_curves.py
+
+
+Produces:
+
+reports/figures/fig_pr_protest_test.png
+
+reports/figures/fig_pr_military_test.png
+
+
+* Files Referenced in the Report:
+
+results/final_binary_report_two_thresholds.csv
+
+results/ablation_binary_results.csv
+
+results/perm_importance_protest.csv
+
+results/perm_importance_military.csv
+
+results/calibration_report.csv (experimental)
+
+reports/figures/fig_pr_protest_test.png
+
+reports/figures/fig_pr_military_test.png
+
+results/ml_results_summary_fixed.csv (single consolidated table)
