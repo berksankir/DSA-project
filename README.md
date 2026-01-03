@@ -195,8 +195,8 @@ results/perm_importance_military.csv
 
 results/calibration_report.csv (experimental)
 
-reports/figures/fig_pr_protest_test.png
+figures/fig_pr_protest_test.png
 
-reports/figures/fig_pr_military_test.png
+figures/fig_pr_military_test.png
 
 results/ml_results_summary_fixed.csv (single consolidated table)
